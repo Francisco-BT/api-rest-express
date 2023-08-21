@@ -6,6 +6,7 @@ const {
   logErrors,
   errorHandler,
   boomErrorHandler,
+  ormErrorHandler,
 } = require('./middleware/error.handler');
 
 const app = express();
@@ -32,7 +33,7 @@ app.get('/api', (req, res) => {
 
 routerApi(app);
 
-app.use(logErrors, boomErrorHandler, errorHandler);
+app.use(logErrors, ormErrorHandler, boomErrorHandler, errorHandler);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
