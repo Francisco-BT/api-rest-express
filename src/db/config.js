@@ -12,5 +12,6 @@ module.exports = {
   production: {
     url: URI,
     dialect: 'postgres',
+    dialectModule: require('pg'),
   },
 };
