@@ -1,4 +1,5 @@
 const boom = require('boom');
+
 const { models } = require('../lib/sequelize');
 
 class CustomerService {

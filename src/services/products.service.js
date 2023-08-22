@@ -1,5 +1,6 @@
 const faker = require('faker');
 const boom = require('boom');
+
 const sequelize = require('../lib/sequelize');
 
 class ProductsService {

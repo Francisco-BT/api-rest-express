@@ -1,12 +1,12 @@
 const { Router } = require('express');
 
-const CustomerService = require('../services/customer.service');
-const validatorHandler = require('../middleware/validator.handler');
+const CustomerService = require('../../src/services/customer.service');
+const validatorHandler = require('../../src/middleware/validator.handler');
 const {
   getCustomerSchema,
   createCustomerSchema,
   updateCustomerSchema,
-} = require('../schemas/customer.schema');
+} = require('../../src/schemas/customer.schema');
 
 const service = new CustomerService();
 const router = Router();

@@ -7,7 +7,7 @@ const {
   errorHandler,
   boomErrorHandler,
   ormErrorHandler,
-} = require('./middleware/error.handler');
+} = require('../src/middleware/error.handler');
 
 const app = express();
 const port = process.env.PORT || 3000;
