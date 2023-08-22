@@ -1,4 +1,4 @@
-const { ValidationError } = require('sequelize');
+const { ValidationError, ForeignKeyConstraintError } = require('sequelize');
 
 function logErrors(error, req, res, next) {
   // eslint-disable-next-line no-console
@@ -19,12 +19,16 @@ function boomErrorHandler(error, req, res, next) {
   if (error.isBoom) {
     const { output } = error;
     res.status(output.statusCode).json(output.payload);
+  } else {
+    next(error);
   }
-  next(error);
 }
 
 function ormErrorHandler(error, req, res, next) {
-  if (error instanceof ValidationError) {
+  if (
+    error instanceof ValidationError ||
+    error instanceof ForeignKeyConstraintError
+  ) {
     res.status(409).json({
       statusCode: 409,
       message: error.name,
