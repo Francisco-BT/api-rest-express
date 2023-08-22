@@ -4,7 +4,9 @@ const { models } = require('../lib/sequelize');
 
 class CustomerService {
   async find() {
-    return models.Customer.findAll();
+    return models.Customer.findAll({
+      include: ['user'],
+    });
   }
 
   async findOne(id) {
@@ -18,7 +20,7 @@ class CustomerService {
   }
 
   create(data) {
-    return models.Customer.create(data);
+    return models.Customer.create(data, { include: ['user'] });
   }
 
   async update(id, changes) {
