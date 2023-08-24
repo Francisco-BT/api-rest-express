@@ -1,4 +1,5 @@
 const boom = require('boom');
+const { Op } = require('sequelize');
 
 const { models } = require('../lib/sequelize');
 
@@ -7,10 +8,30 @@ class ProductsService {
     return models.Product.create(data);
   }
 
-  find() {
-    return models.Product.findAll({
+  find(query) {
+    const { limit, offset, price, priceMin, priceMax } = query;
+    const options = {
       include: ['category'],
-    });
+      where: {},
+    };
+
+    if (limit && query) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    if (price) {
+      options.where.price = price;
+    }
+
+    if (priceMin && priceMax) {
+      options.where.price = {
+        [Op.gte]: priceMin,
+        [Op.lte]: priceMax,
+      };
+    }
+
+    return models.Product.findAll(options);
   }
 
   async findOne(id) {
