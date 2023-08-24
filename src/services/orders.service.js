@@ -14,6 +14,7 @@ class OrdersService {
           association: 'customer',
           include: ['user'],
         },
+        'items',
       ],
     });
 
@@ -26,6 +27,10 @@ class OrdersService {
 
   create(data) {
     return models.Order.create(data);
+  }
+
+  addItem(data) {
+    return models.OrderProduct.create(data);
   }
 
   async update(id, changes) {

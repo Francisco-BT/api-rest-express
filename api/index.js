@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const routerApi = require('./routes');
 const {
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3000;
 // const whiteList = ['http://localhost:8080', 'https://myapp.com/', '*'];
 
 app.use(express.json());
+app.use(morgan('dev'));
 app.use(
   cors(),
   //   {
